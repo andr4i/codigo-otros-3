@@ -1,4 +1,6 @@
-// Tenemos un li de productos
+// Tenemos un li de productos'
+
+// Cabrera Martinez Ricardo: 5 puntos
 
 const productos = [
   {nombre: "Zapato negro", tipo: "zapato", color: "negro", img: "./taco-negro.jpg"},
