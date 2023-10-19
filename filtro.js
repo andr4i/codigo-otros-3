@@ -8,54 +8,43 @@ const productos = [
   {nombre: "Zapato rojo", tipo: "zapato", color: "rojo", img: "./zapato-rojo.jpg"}
 ]
 
-const li = document.getElementsByName("lista-de-productos")
-const $i = document.querySelector('.input');
+const li = document.getElementById("lista-de-productos");
+const input = document.getElementById('InputMain');
 
-for (let i = 0; i < productos.length; i++) {
-  var d = document.createElement("div")
-  d.classList.add("producto")
-
-  var ti = document.createElement("p")
-  ti.classList.add("titulo")
-  ti.textContent = productos[i].nombre
-  
-  var imagen = document.createElement("img");
-  imagen.setAttribute('src', productos[i].img);
-
-  d.appendChild(ti)
-  d.appendChild(imagen)
-
-  li.appendChild(d)
-}
-
-displayProductos(productos)
-const botonDeFiltro = document.querySelector("button");
-
-botonDeFiltro.onclick = function() {
-  while (li.firstChild) {
-    li.removeChild(li.firstChild);
-  }
-
-  const texto = $i.value;
-  console.log(texto);
-  const productosFiltrados = filtrado(productos, texto );
-
-  for (let i = 0; i < productosFiltrados.length; i++) {
+function displayProductos(productos){
+  for (let i = 0; i < productos.length; i++) {
     var d = document.createElement("div")
     d.classList.add("producto")
   
     var ti = document.createElement("p")
     ti.classList.add("titulo")
-    ti.textContent = productosFiltrados[i].nombre
+    ti.textContent = productos[i].nombre
     
     var imagen = document.createElement("img");
-    imagen.setAttribute('src', productosFiltrados[i].img);
+    imagen.setAttribute('src', productos[i].img);
   
     d.appendChild(ti)
     d.appendChild(imagen)
   
     li.appendChild(d)
   }
+}
+
+displayProductos(productos);
+const botonDeFiltro = document.querySelector("button");
+// Agregar event listener al boton 
+botonDeFiltro.addEventListener('click',()=>filtrarProductos(input.value));
+// Funcion para filtrar por color o tipo
+function filtrarProductos(value) {
+  // Se remueve los productos existentes en el dom
+  while (li.firstChild) {
+    li.removeChild(li.firstChild);
+  }
+  // se filtran los valores por el valor en el input
+  const texto = value;
+  console.log(texto);
+  const productosFiltrados = filtrado(productos, texto );
+  displayProductos(productosFiltrados);
 }
 
 const filtrado = (productos = [], texto) => {
